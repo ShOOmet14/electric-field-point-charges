@@ -31,7 +31,7 @@ The program:
 
 - `charges.py` — **English version** (main script)
 - `ladunki.py` — **Polish version** (original script kept for reference)
-- `figures/` — screenshots and equation images used in this README
+- `Figures/` — screenshots and equation images used in this README
 
 ---
 
@@ -39,23 +39,23 @@ The program:
 
 ### Electric field from a single point charge
 
-<img src="Figures/equation.jpg" alt="Electric field from single charge" width="260"/>
+<img src="Figures/equation.jpg" alt="Electric field from single charge" width="100"/>
 
 ### Position vector from the charge to the control point
 
-<img src="Figures/equation1.jpg" alt="Position vector" width="260"/>
+<img src="Figures/equation1.jpg" alt="Position vector" width="100"/>
 
 ### Constant used in the assignment
 
 According to the assignment requirement:
 
-<img src="Figures/equation2.jpg" alt="k constant" width="260"/>
+<img src="Figures/equation2.jpg" alt="k constant" width="100"/>
 
 In the code we use: **k = 1**
 
 ### Distance between charge and control point
 
-<img src="Figures/equation3.jpg" alt="Distance r" width="220"/>
+<img src="Figures/equation3.jpg" alt="Distance r" width="100"/>
 
 ---
 
