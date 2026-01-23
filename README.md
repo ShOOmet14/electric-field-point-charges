@@ -6,37 +6,40 @@ The program:
 
 - generates **unique** charge positions (no duplicates),
 - prevents placing any charge at the control point coordinates,
-- computes the electric field using **superposition**,
+- computes the electric field using the **superposition principle**,
 - visualizes charges, the control point, and the **electric field vector** on a plot.
 
 ---
 
-## Project files
+## Project structure
 
 - `charges.py` — **English version** (main script)
 - `ladunki.py` — **Polish version** (original script kept for reference)
-- `Figure_1.png` — example plot (charges + control point + electric field vector)
-- `Figure_2.png` — example plot (different random configuration)
-- `Figure_3.png` — example console output
-- `README.md` — project description
-- `.gitignore` — ignored files list
+- `figures/` — screenshots and equation images used in this README
 
 ---
 
-## Electric Field Formula
+## Equations used in the project
 
-The electric field at point **P** is computed using superposition:
+### Electric field from a single point charge
 
-![equation](https://latex.codecogs.com/svg.image?\vec{E}=\sum_i%20q_i\frac{\vec{r_i}}{|\vec{r_i}|^3})
+<img src="figures/equation.jpg" alt="Electric field from single charge" width="260"/>
 
-where:
+### Position vector from the charge to the control point
 
-- **r** = (xP − xi, yP − yi)
-- **|r|** = sqrt((xP − xi)² + (yP − yi)²)
+<img src="figures/equation1.jpg" alt="Position vector" width="260"/>
+
+### Constant used in the assignment
 
 According to the assignment requirement:
 
-**1 / (4π ε₀) = 1**, so the constant **k = 1**.
+<img src="figures/equation2.jpg" alt="k constant" width="260"/>
+
+In the code we use: **k = 1**
+
+### Distance between charge and control point
+
+<img src="figures/equation3.jpg" alt="Distance r" width="220"/>
 
 ---
 
