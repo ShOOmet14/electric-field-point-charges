@@ -11,6 +11,22 @@ The program:
 
 ---
 
+## Screenshots
+
+### Example plot 1
+
+<img src="Figures/Figure_1.png" alt="Example plot 1" width="800"/>
+
+### Example plot 2
+
+<img src="Figures/Figure_2.png" alt="Example plot 2" width="800"/>
+
+### Console output example
+
+<img src="Figures/Figure_3.png" alt="Console output example" width="900"/>
+
+---
+
 ## Project structure
 
 - `charges.py` — **English version** (main script)
@@ -23,23 +39,23 @@ The program:
 
 ### Electric field from a single point charge
 
-<img src="figures/equation.jpg" alt="Electric field from single charge" width="260"/>
+<img src="Figures/equation.jpg" alt="Electric field from single charge" width="260"/>
 
 ### Position vector from the charge to the control point
 
-<img src="figures/equation1.jpg" alt="Position vector" width="260"/>
+<img src="Figures/equation1.jpg" alt="Position vector" width="260"/>
 
 ### Constant used in the assignment
 
 According to the assignment requirement:
 
-<img src="figures/equation2.jpg" alt="k constant" width="260"/>
+<img src="Figures/equation2.jpg" alt="k constant" width="260"/>
 
 In the code we use: **k = 1**
 
 ### Distance between charge and control point
 
-<img src="figures/equation3.jpg" alt="Distance r" width="220"/>
+<img src="Figures/equation3.jpg" alt="Distance r" width="220"/>
 
 ---
 
