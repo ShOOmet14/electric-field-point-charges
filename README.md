@@ -1,85 +1,136 @@
-# Electric Field - Point Charges
+# Electric Field of Point Charges
 
-This project simulates the **electric field vector** **E** at a chosen control point **P**, produced by multiple **point charges** randomly placed on a 2D grid.
+[![Tests](https://github.com/ShOOmet14/electric-field-point-charges/actions/workflows/tests.yml/badge.svg)](https://github.com/ShOOmet14/electric-field-point-charges/actions/workflows/tests.yml)
+![Python](https://img.shields.io/badge/python-3.12-blue?logo=python&logoColor=white)
 
-The program:
+A compact computational-physics program that calculates the resultant electric-field vector at one selected point due to multiple ideal point charges on a two-dimensional grid.
 
-- generates **unique** charge positions (no duplicates),
-- prevents placing any charge at the control point coordinates,
-- computes the electric field using the **superposition principle**,
-- visualizes charges, the control point, and the **electric field vector** on a plot.
+## Overview
 
----
+The application generates point charges at unique random grid positions, evaluates each charge's contribution at a control point, and combines the contributions using superposition. It then plots the charge configuration and the direction of the resultant field.
 
-## Screenshots
+The original university assignment defines a **normalized Coulomb constant** $k=1$. Charge values, distances, and calculated electric fields are therefore expressed in assignment-defined normalized units—not coulombs, metres, or volts per metre.
 
-### Example plot 1
+## Physical Model
 
-<img src="Figures/Figure_1.png" alt="Example plot 1" width="800"/>
+For charge $q_i$ at position $\mathbf{r}_{q_i}$ and control point $\mathbf{r}_P$, the displacement vector points from the source charge to the control point:
 
-### Example plot 2
+```math
+\mathbf{r}_i = \mathbf{r}_P - \mathbf{r}_{q_i}.
+```
 
-<img src="Figures/Figure_2.png" alt="Example plot 2" width="800"/>
+The field contribution is calculated from Coulomb's law:
 
-### Console output example
+```math
+\mathbf{E}_i
+=
+kq_i\frac{\mathbf{r}_i}{\left\lVert\mathbf{r}_i\right\rVert^3},
+\qquad k=1.
+```
 
-<img src="Figures/Figure_3.png" alt="Console output example" width="900"/>
+The resultant field follows from the superposition principle:
 
----
+```math
+\mathbf{E}_{\mathrm{total}} = \sum_{i=1}^{N}\mathbf{E}_i.
+```
 
-## Project structure
+Positive charges produce a field directed away from the source; negative charges produce a field directed toward it. A field point that coincides with a source charge is undefined and raises a clear error instead of being replaced by an artificial small distance.
 
-- `charges.py` — **English version** (main script)
-- `ladunki.py` — **Polish version** (original script kept for reference)
-- `Figures/` — screenshots and equation images used in this README
-
----
-
-## Equations used in the project
-
-### Electric field from a single point charge
-
-<img src="Figures/equation.jpg" alt="Electric field from single charge" width="100"/>
-
-### Position vector from the charge to the control point
-
-<img src="Figures/equation1.jpg" alt="Position vector" width="100"/>
-
-### Constant used in the assignment
-
-According to the assignment requirement:
-
-<img src="Figures/equation2.jpg" alt="k constant" width="100"/>
-
-In the code we use: **k = 1**
-
-### Distance between charge and control point
-
-<img src="Figures/equation3.jpg" alt="Distance r" width="100"/>
-
----
+The model treats charges as stationary ideal point charges. Their geometry is represented in a two-dimensional plane, while the usual inverse-square point-charge law is evaluated from the planar displacement vector.
 
 ## Features
 
-- Random generation of **N unique** point charges on a 2D grid
-- Charges never appear at the control point `(xP, yP)`
-- Charge values are random integers in range `[q_min, q_max]` excluding `0`
-- Visualization with Matplotlib:
-  - `q > 0` → blue
-  - `q < 0` → red
-  - control point `P` → green
-  - electric field vector at `P` → green arrow (**scaled for visibility**)
+- Random nonzero integer charge values within a selected range
+- Unique charge positions with the control point excluded
+- Reproducible generation through an optional seeded NumPy generator
+- Independent functions for single-charge fields and superposition
+- Validation of coordinate, charge-value, count, and zero-distance cases
+- Matplotlib visualization of charges and resultant-field direction
+- Focused physics tests and continuous integration
 
----
+## Visualisation
 
-## Requirements
+![Example point-charge configuration and normalized field direction](figures/electric_field_example.png)
 
-- Python 3
-- NumPy
-- Matplotlib
+Positive charges are red, negative charges are blue, and the control point is marked with a black cross. The green arrow points in the calculated direction of $\mathbf{E}_{\mathrm{total}}$.
 
-Install dependencies:
+The arrow is always scaled to a fixed display length. Its plotted length **does not represent the calculated field magnitude**; the numerical components and magnitude are printed in the terminal.
+
+## Installation
+
+Python 3.12 is used in continuous integration.
 
 ```bash
-pip install numpy matplotlib
+git clone https://github.com/ShOOmet14/electric-field-point-charges.git
+cd electric-field-point-charges
+python -m venv venv
 ```
+
+Activate the environment on Windows PowerShell:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+Or on macOS/Linux:
+
+```bash
+source venv/bin/activate
+```
+
+Install the runtime dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+## Usage
+
+Run the interactive application from the repository root:
+
+```bash
+python charges.py
+```
+
+The program asks for:
+
+1. the grid radius, which defines coordinates from `-radius` to `+radius`;
+2. the control-point coordinates;
+3. the number of charges;
+4. the inclusive minimum and maximum integer charge values.
+
+The charge-value range must contain at least one nonzero integer. Generated positions are unique and never coincide with the control point.
+
+## Testing
+
+Install the development dependencies and run pytest:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest -q
+```
+
+The tests cover positive and negative charge direction, inverse-square scaling, vector superposition, symmetry and complete cancellation, undefined zero distance, the configurable normalized constant, deterministic random generation, unique positions, control-point exclusion, nonzero charges, and invalid input ranges.
+
+## Project Structure
+
+```text
+├── .github/workflows/tests.yml  Continuous integration
+├── figures/                     Example result plot
+├── tests/test_charges.py        Physics and generation tests
+├── charges.py                   Calculation, interaction, and visualization
+├── requirements.txt             Runtime dependencies
+└── requirements-dev.txt         Test dependencies
+```
+
+## Limitations
+
+- The electric field is evaluated at one control point, not across a spatial grid.
+- Charges are stationary ideal point charges represented in two dimensions.
+- The assignment uses normalized $k=1$ and dimensionless input values, so results are not SI electric-field values.
+- The displayed field-arrow length is normalized for readability.
+- No electric-potential calculation, field map, field lines, dynamics, boundaries, or material response are included.
+
+## Future Development
+
+Realistic extensions could evaluate the field or electric potential on a two-dimensional grid, display a vector-field map, or accept manually specified charge configurations. These are intentionally outside the current assignment-scale implementation.
